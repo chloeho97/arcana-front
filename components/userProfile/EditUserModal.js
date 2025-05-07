@@ -92,7 +92,7 @@ const EditUserModal = ({ isOpen, onClose, userInfo, onUpdate }) => {
 
       // Étape 2 : Envoyer l'objet FormData au backend pour mettre à jour les informations de l'utilisateur
       const response = await axios.put(
-        `http://localhost:3000/users/${userId}`,
+        `https://arcana-back-2.vercel.app/users/${userId}`,
         formDataToSend,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
