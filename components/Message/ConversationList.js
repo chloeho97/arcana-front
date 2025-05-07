@@ -14,7 +14,7 @@ const ConversationList = ({ currentUserId, onSelectUser, selectedUser }) => {
   const fetchConversations = async () => {
     try {
       const res = await fetch(
-        `https://arcana-back-2.vercel.app/messages/conversations/${currentUserId}`
+        `https://arcana-back-two.vercel.app/messages/conversations/${currentUserId}`
       );
       const data = await res.json();
 
@@ -23,7 +23,7 @@ const ConversationList = ({ currentUserId, onSelectUser, selectedUser }) => {
         const conversationsWithTimestamp = await Promise.all(
           data.map(async (user) => {
             const msgRes = await fetch(
-              `https://arcana-back-2.vercel.app/messages/${currentUserId}/${user._id}/last`
+              `https://arcana-back-two.vercel.app/messages/${currentUserId}/${user._id}/last`
             );
             const lastMsg = await msgRes.json();
             return {
@@ -50,7 +50,7 @@ const ConversationList = ({ currentUserId, onSelectUser, selectedUser }) => {
         for (const conv of sortedConversations) {
           if (conv.hasUnread) {
             const countRes = await fetch(
-              `https://arcana-back-2.vercel.app/messages/${currentUserId}/${conv._id}/unread/count`
+              `https://arcana-back-two.vercel.app/messages/${currentUserId}/${conv._id}/unread/count`
             );
             const { count } = await countRes.json();
             if (count > 0) {
@@ -89,7 +89,7 @@ const ConversationList = ({ currentUserId, onSelectUser, selectedUser }) => {
   const markConversationAsRead = async (userId) => {
     try {
       await fetch(
-        `https://arcana-back-2.vercel.app/messages/${currentUserId}/${userId}/mark-read`,
+        `https://arcana-back-two.vercel.app/messages/${currentUserId}/${userId}/mark-read`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -110,7 +110,7 @@ const ConversationList = ({ currentUserId, onSelectUser, selectedUser }) => {
   const handleSearch = async (query) => {
     try {
       const res = await fetch(
-        `https://arcana-back-2.vercel.app/search?q=${query}`
+        `https://arcana-back-two.vercel.app/search?q=${query}`
       );
       const data = await res.json();
       if (data.result && Array.isArray(data.users)) {
@@ -126,7 +126,7 @@ const ConversationList = ({ currentUserId, onSelectUser, selectedUser }) => {
   const handleStartConversation = async (targetUserId) => {
     try {
       const res = await fetch(
-        `https://arcana-back-2.vercel.app/messages/start-conversation`,
+        `https://arcana-back-two.vercel.app/messages/start-conversation`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -166,7 +166,7 @@ const ConversationList = ({ currentUserId, onSelectUser, selectedUser }) => {
       if (!conversationToDelete) return;
 
       await fetch(
-        `https://arcana-back-2.vercel.app/messages/conversation/${currentUserId}/${conversationToDelete._id}`,
+        `https://arcana-back-two.vercel.app/messages/conversation/${currentUserId}/${conversationToDelete._id}`,
         {
           method: "DELETE",
         }

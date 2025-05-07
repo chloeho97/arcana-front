@@ -22,7 +22,7 @@ export default function SearchResults({ users = [], collections = [] }) {
         users.map(async (user) => {
           try {
             const response = await axios.get(
-              `https://arcana-back-2.vercel.app/collections/count/${user._id}`
+              `https://arcana-back-two.vercel.app/collections/count/${user._id}`
             );
             return { ...user, collectionsCount: response.data.count };
           } catch (error) {

@@ -20,7 +20,7 @@ const TabCollection = ({ userId }) => {
       if (userId) {
         try {
           const response = await axios.get(
-            `https://arcana-back-2.vercel.app/collections/user/${userId}`
+            `https://arcana-back-two.vercel.app/collections/user/${userId}`
           );
           if (response.data.result) {
             setCollections(response.data.collections);

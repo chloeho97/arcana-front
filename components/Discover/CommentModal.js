@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/router";
 
-const API_BASE_URL = "https://arcana-back-2.vercel.app";
+const API_BASE_URL = "https://arcana-back-two.vercel.app";
 
 export default function CommentModal({ isOpen, onClose, collection }) {
   const router = useRouter();

@@ -23,7 +23,7 @@ const TabFavorite = ({ userId }) => {
       if (userId) {
         try {
           const likesResponse = await fetch(
-            `https://arcana-back-2.vercel.app/likes/${userId}`
+            `https://arcana-back-two.vercel.app/likes/${userId}`
           );
           const likesData = await likesResponse.json();
 

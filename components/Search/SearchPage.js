@@ -20,7 +20,7 @@ export default function Search() {
       try {
         setLoading(true);
         const res = await axios.get(
-          `https://arcana-back-2.vercel.app/search?q=${q}`
+          `https://arcana-back-two.vercel.app/search?q=${q}`
         );
         if (res.data.result) {
           setCollections(res.data.collections || []);

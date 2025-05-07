@@ -84,7 +84,7 @@ export function LibraryModal({ isOpen, onClose, onCollectionCreated }) {
       }
 
       const response = await axios.post(
-        "https://arcana-back-2.vercel.app/collections",
+        "https://arcana-back-two.vercel.app/collections",
         formDataToSend,
         {
           headers: { "Content-Type": "multipart/form-data" },

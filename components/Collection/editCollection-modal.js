@@ -77,7 +77,7 @@ export function EditCollectionModal({ isOpen, onClose, selectedCollection }) {
       }
 
       const response = await axios.put(
-        `https://arcana-back-2.vercel.app/collections/${selectedCollection._id}`,
+        `https://arcana-back-two.vercel.app/collections/${selectedCollection._id}`,
         formDataToSend,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -98,7 +98,7 @@ export function EditCollectionModal({ isOpen, onClose, selectedCollection }) {
   const handleDelete = async () => {
     try {
       const deleteElement = await fetch(
-        `https://arcana-back-2.vercel.app/collections/${selectedCollection._id}`,
+        `https://arcana-back-two.vercel.app/collections/${selectedCollection._id}`,
         { method: "DELETE" }
       );
       onClose();
