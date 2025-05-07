@@ -84,7 +84,7 @@ const EditElementModal = ({ collectionId, onClose, element }) => {
 
     try {
       const response = await fetch(
-        `https://arcana-back.vercel.app/elements/${element._id}`,
+        `https://arcana-back-v2.vercel.app/elements/${element._id}`,
         {
           method: "PUT",
           headers: {
@@ -117,7 +117,7 @@ const EditElementModal = ({ collectionId, onClose, element }) => {
   const handleDelete = async () => {
     try {
       const deleteElement = await fetch(
-        `https://arcana-back.vercel.app/elements/${element._id}`,
+        `https://arcana-back-v2.vercel.app/elements/${element._id}`,
         { method: "DELETE" }
       );
       onClose();

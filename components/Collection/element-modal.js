@@ -37,7 +37,7 @@ const ElementModal = ({ collectionId, onClose }) => {
         setIsLoading(true);
         axios
           .get(
-            `https://arcana-back.vercel.app/autocomplete/${formData.type}?query=${formData.title}`
+            `https://arcana-back-v2.vercel.app/autocomplete/${formData.type}?query=${formData.title}`
           )
           .then((response) => {
             setSearchResults(response.data);
@@ -132,24 +132,27 @@ const ElementModal = ({ collectionId, onClose }) => {
     }
 
     try {
-      const response = await fetch(`https://arcana-back.vercel.app/elements`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: formData.title || "",
-          description: formData.description || "",
-          review: formData.review || "",
-          author: formData.author || "",
-          rating: formData.rating || 0,
-          cover: formData.cover || "/assets/default-cover.png",
-          releaseDate: formData.releaseDate || "",
-          status: formData.status || "",
-          type: formData.type || "",
-          collectionId: collectionId,
-        }),
-      });
+      const response = await fetch(
+        `https://arcana-back-v2.vercel.app/elements`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: formData.title || "",
+            description: formData.description || "",
+            review: formData.review || "",
+            author: formData.author || "",
+            rating: formData.rating || 0,
+            cover: formData.cover || "/assets/default-cover.png",
+            releaseDate: formData.releaseDate || "",
+            status: formData.status || "",
+            type: formData.type || "",
+            collectionId: collectionId,
+          }),
+        }
+      );
 
       const data = await response.json();
 

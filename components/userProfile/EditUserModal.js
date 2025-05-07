@@ -108,7 +108,7 @@ const EditUserModal = ({ isOpen, onClose, userInfo, onUpdate }) => {
 
       // Étape 2 : Envoyer l'objet JSON au backend pour mettre à jour les informations de l'utilisateur
       const response = await axios.put(
-        `https://arcana-back.vercel.app/users/${userId}`,
+        `https://arcana-back-v2.vercel.app/users/${userId}`,
         {
           username: formData.username,
           email: formData.email,

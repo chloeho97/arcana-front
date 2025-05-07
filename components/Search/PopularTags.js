@@ -13,7 +13,7 @@ export default function PopularTags() {
       try {
         setLoading(true);
         const response = await axios.get(
-          "https://arcana-back.vercel.app/search/popular-tags"
+          "https://arcana-back-v2.vercel.app/search/popular-tags"
         );
         if (response.data.result) {
           setPopularTags(response.data.popularTags);

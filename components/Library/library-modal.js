@@ -93,7 +93,7 @@ export function LibraryModal({ isOpen, onClose, onCollectionCreated }) {
       }
 
       const response = await axios.post(
-        "https://arcana-back.vercel.app/collections",
+        "https://arcana-back-v2.vercel.app/collections",
         {
           title: formData.title,
           description: formData.description,

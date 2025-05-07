@@ -31,7 +31,7 @@ const MessagesPage = () => {
     const checkUnreadMessages = async () => {
       try {
         const res = await fetch(
-          `https://arcana-back.vercel.app/messages/${currentUserId}/unread/total`
+          `https://arcana-back-v2.vercel.app/messages/${currentUserId}/unread/total`
         );
         const { total } = await res.json();
         setTotalUnread(total);
@@ -53,7 +53,7 @@ const MessagesPage = () => {
       const fetchSelectedUser = async () => {
         try {
           const response = await fetch(
-            `https://arcana-back.vercel.app/users/${selectedUserId}`
+            `https://arcana-back-v2.vercel.app/users/${selectedUserId}`
           );
           const data = await response.json();
 
