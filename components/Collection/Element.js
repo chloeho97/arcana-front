@@ -204,7 +204,7 @@ const Element = ({ collection, collectionId, isProfileOwner }) => {
       if (isAuthenticated && userId) {
         try {
           const response = await axios.get(
-            `http://localhost:3000/elements/collection/${collectionId}`
+            `https://arcana-back.vercel.app/elements/collection/${collectionId}`
           );
           if (response.data.result) {
             setElements(response.data.elements);

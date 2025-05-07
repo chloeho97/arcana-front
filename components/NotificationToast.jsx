@@ -15,7 +15,7 @@ const NotificationToast = () => {
     const checkUnreadMessages = async () => {
       try {
         const res = await fetch(
-          `http://localhost:3000/messages/${currentUserId}/unread/total`
+          `https://arcana-back.vercel.app/messages/${currentUserId}/unread/total`
         );
         const { total, lastMessage } = await res.json();
 
@@ -23,7 +23,7 @@ const NotificationToast = () => {
 
         if (lastMessage) {
           const senderRes = await fetch(
-            `http://localhost:3000/users/${lastMessage.sender}`
+            `https://arcana-back.vercel.app/users/${lastMessage.sender}`
           );
           const sender = await senderRes.json();
           dispatch(

@@ -19,7 +19,9 @@ export default function Search() {
     const fetchResults = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`http://localhost:3000/search?q=${q}`);
+        const res = await axios.get(
+          `https://arcana-back.vercel.app/search?q=${q}`
+        );
         if (res.data.result) {
           setCollections(res.data.collections || []);
           setUsers(res.data.users || []);

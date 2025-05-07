@@ -32,7 +32,7 @@ export function LoginModal({ isOpen, onClose, openSignupModal }) {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/users/signin",
+        "https://arcana-back.vercel.app/users/signin",
         formData
       );
 

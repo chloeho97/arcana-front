@@ -78,7 +78,7 @@ function Header() {
       if (user.userId) {
         try {
           const userResponse = await fetch(
-            `http://localhost:3000/users/${user.userId}`
+            `https://arcana-back.vercel.app/users/${user.userId}`
           );
           const userData = await userResponse.json();
           if (userData.result) {
@@ -102,7 +102,7 @@ function Header() {
     const checkUnreadMessages = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/messages/${user.userId}/unread/total`
+          `https://arcana-back.vercel.app/messages/${user.userId}/unread/total`
         );
         const { total } = await response.json();
         setUnreadMessagesCount(total);
@@ -157,9 +157,12 @@ function Header() {
   const handleLogout = async () => {
     const token = localStorage.getItem("token");
     try {
-      const { data } = await axios.post("http://localhost:3000/users/logout", {
-        token,
-      });
+      const { data } = await axios.post(
+        "https://arcana-back.vercel.app/users/logout",
+        {
+          token,
+        }
+      );
       if (data.result) {
         localStorage.removeItem("token");
         dispatch(logout());

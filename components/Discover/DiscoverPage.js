@@ -45,9 +45,9 @@ export default function Discover() {
   const fetchCollections = async () => {
     try {
       const [topRes, recentRes, randomRes] = await Promise.all([
-        axios.get("http://localhost:3000/collections/top"),
-        axios.get("http://localhost:3000/collections/recent"),
-        axios.get("http://localhost:3000/collections/random"),
+        axios.get("https://arcana-back.vercel.app/collections/top"),
+        axios.get("https://arcana-back.vercel.app/collections/recent"),
+        axios.get("https://arcana-back.vercel.app/collections/random"),
       ]);
 
       setTop(formatCollections(topRes.data.collections));
@@ -64,7 +64,7 @@ export default function Discover() {
       if (!token) return;
 
       const { data } = await axios.post(
-        "http://localhost:3000/users/by-token",
+        "https://arcana-back.vercel.app/users/by-token",
         {
           token,
         }
@@ -72,7 +72,9 @@ export default function Discover() {
       if (!data.result || !data.user) return;
 
       const userId = data.user._id;
-      const likesRes = await axios.get(`http://localhost:3000/likes/${userId}`);
+      const likesRes = await axios.get(
+        `https://arcana-back.vercel.app/likes/${userId}`
+      );
 
       const ids = (likesRes.data.likes || [])
         .map(
@@ -108,7 +110,7 @@ export default function Discover() {
       }
 
       const { data } = await axios.post(
-        "http://localhost:3000/users/by-token",
+        "https://arcana-back.vercel.app/users/by-token",
         {
           token,
         }
@@ -119,10 +121,12 @@ export default function Discover() {
       const already = likedIds.includes(id);
 
       if (already) {
-        await axios.delete(`http://localhost:3000/likes/${userId}/${id}`);
+        await axios.delete(
+          `https://arcana-back.vercel.app/likes/${userId}/${id}`
+        );
         setLikedIds((prev) => prev.filter((x) => x !== id));
       } else {
-        await axios.post("http://localhost:3000/likes/like", {
+        await axios.post("https://arcana-back.vercel.app/likes/like", {
           userId,
           collectionId: id,
         });

@@ -20,13 +20,13 @@ const ChatBox = ({ currentUserId, targetUserId, targetUser, onCloseChat }) => {
   const fetchMessages = async () => {
     try {
       const res = await fetch(
-        `http://localhost:3000/messages/${currentUserId}/${targetUserId}`
+        `https://arcana-back.vercel.app/messages/${currentUserId}/${targetUserId}`
       );
       const data = await res.json();
       setMessages(data);
 
       await fetch(
-        `http://localhost:3000/messages/${currentUserId}/${targetUserId}/mark-read`,
+        `https://arcana-back.vercel.app/messages/${currentUserId}/${targetUserId}/mark-read`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -44,7 +44,7 @@ const ChatBox = ({ currentUserId, targetUserId, targetUser, onCloseChat }) => {
     setIsSending(true);
 
     try {
-      await fetch("http://localhost:3000/messages", {
+      await fetch("https://arcana-back.vercel.app/messages", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -74,13 +74,16 @@ const ChatBox = ({ currentUserId, targetUserId, targetUser, onCloseChat }) => {
     if (!selectedMessage) return;
 
     try {
-      await fetch(`http://localhost:3000/messages/${selectedMessage._id}`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userId: currentUserId,
-        }),
-      });
+      await fetch(
+        `https://arcana-back.vercel.app/messages/${selectedMessage._id}`,
+        {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId: currentUserId,
+          }),
+        }
+      );
 
       setMessages(messages.filter((msg) => msg._id !== selectedMessage._id));
       setIsDeleteModalOpen(false);

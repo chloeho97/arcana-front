@@ -92,14 +92,17 @@ export function LibraryModal({ isOpen, onClose, onCollectionCreated }) {
         coverUrl = cloudinaryData.secure_url;
       }
 
-      const response = await axios.post("http://localhost:3000/collections", {
-        title: formData.title,
-        description: formData.description,
-        userId,
-        cover: coverUrl && coverUrl.trim() !== "" ? coverUrl : undefined,
-        visibility: formData.visibility,
-        tags: formData.tags,
-      });
+      const response = await axios.post(
+        "https://arcana-back.vercel.app/collections",
+        {
+          title: formData.title,
+          description: formData.description,
+          userId,
+          cover: coverUrl && coverUrl.trim() !== "" ? coverUrl : undefined,
+          visibility: formData.visibility,
+          tags: formData.tags,
+        }
+      );
 
       if (response.data.result) {
         onCollectionCreated(response.data.collection);

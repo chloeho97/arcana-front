@@ -60,7 +60,7 @@ const LibraryPage = () => {
       if (isAuthenticated && userId) {
         try {
           const response = await axios.get(
-            `http://localhost:3000/collections/user/${userId}`
+            `https://arcana-back.vercel.app/collections/user/${userId}`
           );
           if (response.data.result) {
             setCollections(response.data.collections);

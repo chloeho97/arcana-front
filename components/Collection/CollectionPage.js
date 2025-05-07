@@ -34,7 +34,7 @@ export default function CollectionPage({ collectionId }) {
       try {
         // Récupérer les infos de la collection
         const response = await fetch(
-          `http://localhost:3000/collections/${collectionId}`
+          `https://arcana-back.vercel.app/collections/${collectionId}`
         );
         const collectionData = await response.json();
 
@@ -47,7 +47,7 @@ export default function CollectionPage({ collectionId }) {
 
         // Récupérer le nombre de like de la collection
         const likesResponse = await fetch(
-          `http://localhost:3000/likes/collection/${collectionId}`
+          `https://arcana-back.vercel.app/likes/collection/${collectionId}`
         );
         const likesData = await likesResponse.json();
 
@@ -58,7 +58,7 @@ export default function CollectionPage({ collectionId }) {
         // Vérifier si le user a déjà liké la collection
         if (isAuthenticated && userId) {
           const likesByUserRes = await fetch(
-            `http://localhost:3000/likes/${userId}`
+            `https://arcana-back.vercel.app/likes/${userId}`
           );
           const likesByUserData = await likesByUserRes.json();
           if (likesByUserData.result && likesByUserData.likes) {
@@ -85,7 +85,7 @@ export default function CollectionPage({ collectionId }) {
     if (isAuthenticated && userId) {
       try {
         const likesByUser = await fetch(
-          `http://localhost:3000/likes/${userId}`
+          `https://arcana-back.vercel.app/likes/${userId}`
         );
         const likesByUserResponse = await likesByUser.json();
 
@@ -96,7 +96,7 @@ export default function CollectionPage({ collectionId }) {
           );
 
         if (!isCurrentlyLiked) {
-          await fetch("http://localhost:3000/likes/like", {
+          await fetch("https://arcana-back.vercel.app/likes/like", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -110,9 +110,12 @@ export default function CollectionPage({ collectionId }) {
           // Incrémenter le nombre de likes
           setLikes((prevLikes) => prevLikes + 1);
         } else {
-          await fetch(`http://localhost:3000/likes/${userId}/${collectionId}`, {
-            method: "DELETE",
-          });
+          await fetch(
+            `https://arcana-back.vercel.app/likes/${userId}/${collectionId}`,
+            {
+              method: "DELETE",
+            }
+          );
           setIsLiked(false);
           setLikes((prevLikes) => prevLikes - 1);
         }

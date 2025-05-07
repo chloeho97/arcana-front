@@ -16,7 +16,7 @@ import {
   ToggleRepliesButton,
 } from "./CommentsComposants";
 
-const API_BASE_URL = "http://localhost:3000";
+const API_BASE_URL = "https://arcana-back.vercel.app";
 
 export default function CollectionComments({ collection, collectionId }) {
   const [comment, setComment] = useState("");
@@ -63,7 +63,7 @@ export default function CollectionComments({ collection, collectionId }) {
       setIsLoading(true);
       try {
         const commentsResponse = await fetch(
-          `http://localhost:3000/comments/collection/${collectionId}`
+          `https://arcana-back.vercel.app/comments/collection/${collectionId}`
         );
         const commentsData = await commentsResponse.json();
         if (commentsData.result) {

@@ -25,7 +25,7 @@ const FollowingModal = ({ isOpen, onClose, following }) => {
           const details = await Promise.all(
             following.map(async (followedUser) => {
               const response = await fetch(
-                `http://localhost:3000/users/${followedUser.userId}`
+                `https://arcana-back.vercel.app/users/${followedUser.userId}`
               );
               const data = await response.json();
               if (data.result) {
