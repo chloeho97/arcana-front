@@ -32,7 +32,7 @@ export default function Activity() {
 
       const query = filterType !== "all" ? `?type=${filterType}` : "";
       const res = await axios.get(
-        `https://arcana-back-v2.vercel.app/activity/feed/${token}${query}`
+        `https://arcana-back-2.vercel.app/activity/feed/${token}${query}`
       );
 
       if (res.data.result) {

@@ -31,7 +31,7 @@ const TabActivityOther = ({ userId }) => {
       if (userId) {
         try {
           const activitiesResponse = await fetch(
-            `https://arcana-back-v2.vercel.app/activity/user/${userId}`
+            `https://arcana-back-2.vercel.app/activity/user/${userId}`
           );
           const activitiesData = await activitiesResponse.json();
 

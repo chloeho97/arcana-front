@@ -45,9 +45,9 @@ export default function Discover() {
   const fetchCollections = async () => {
     try {
       const [topRes, recentRes, randomRes] = await Promise.all([
-        axios.get("https://arcana-back-v2.vercel.app/collections/top"),
-        axios.get("https://arcana-back-v2.vercel.app/collections/recent"),
-        axios.get("https://arcana-back-v2.vercel.app/collections/random"),
+        axios.get("https://arcana-back-2.vercel.app/collections/top"),
+        axios.get("https://arcana-back-2.vercel.app/collections/recent"),
+        axios.get("https://arcana-back-2.vercel.app/collections/random"),
       ]);
 
       setTop(formatCollections(topRes.data.collections));
@@ -64,7 +64,7 @@ export default function Discover() {
       if (!token) return;
 
       const { data } = await axios.post(
-        "https://arcana-back-v2.vercel.app/users/by-token",
+        "https://arcana-back-2.vercel.app/users/by-token",
         {
           token,
         }
@@ -73,7 +73,7 @@ export default function Discover() {
 
       const userId = data.user._id;
       const likesRes = await axios.get(
-        `https://arcana-back-v2.vercel.app/likes/${userId}`
+        `https://arcana-back-2.vercel.app/likes/${userId}`
       );
 
       const ids = (likesRes.data.likes || [])
@@ -110,7 +110,7 @@ export default function Discover() {
       }
 
       const { data } = await axios.post(
-        "https://arcana-back-v2.vercel.app/users/by-token",
+        "https://arcana-back-2.vercel.app/users/by-token",
         {
           token,
         }
@@ -122,11 +122,11 @@ export default function Discover() {
 
       if (already) {
         await axios.delete(
-          `https://arcana-back-v2.vercel.app/likes/${userId}/${id}`
+          `https://arcana-back-2.vercel.app/likes/${userId}/${id}`
         );
         setLikedIds((prev) => prev.filter((x) => x !== id));
       } else {
-        await axios.post("https://arcana-back-v2.vercel.app/likes/like", {
+        await axios.post("https://arcana-back-2.vercel.app/likes/like", {
           userId,
           collectionId: id,
         });

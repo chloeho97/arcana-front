@@ -78,7 +78,7 @@ function Header() {
       if (user.userId) {
         try {
           const userResponse = await fetch(
-            `https://arcana-back-v2.vercel.app/users/${user.userId}`
+            `https://arcana-back-2.vercel.app/users/${user.userId}`
           );
           const userData = await userResponse.json();
           if (userData.result) {
@@ -102,7 +102,7 @@ function Header() {
     const checkUnreadMessages = async () => {
       try {
         const response = await fetch(
-          `https://arcana-back-v2.vercel.app/messages/${user.userId}/unread/total`
+          `https://arcana-back-2.vercel.app/messages/${user.userId}/unread/total`
         );
         const { total } = await response.json();
         setUnreadMessagesCount(total);
@@ -158,7 +158,7 @@ function Header() {
     const token = localStorage.getItem("token");
     try {
       const { data } = await axios.post(
-        "https://arcana-back-v2.vercel.app/users/logout",
+        "https://arcana-back-2.vercel.app/users/logout",
         {
           token,
         }

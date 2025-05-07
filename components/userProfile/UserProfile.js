@@ -40,7 +40,7 @@ export default function UserProfile({ userId }) {
       if (userId) {
         try {
           const userResponse = await fetch(
-            `https://arcana-back-v2.vercel.app/users/${userId}`
+            `https://arcana-back-2.vercel.app/users/${userId}`
           );
           const userData = await userResponse.json();
 
@@ -52,7 +52,7 @@ export default function UserProfile({ userId }) {
 
           if (currentUserId) {
             const connectionsResponse = await fetch(
-              `https://arcana-back-v2.vercel.app/users/connections/${currentUserId}`
+              `https://arcana-back-2.vercel.app/users/connections/${currentUserId}`
             );
             const connectionsData = await connectionsResponse.json();
 
@@ -62,7 +62,7 @@ export default function UserProfile({ userId }) {
           }
 
           const collectionsResponse = await fetch(
-            `https://arcana-back-v2.vercel.app/collections/user/${userId}`
+            `https://arcana-back-2.vercel.app/collections/user/${userId}`
           );
           const collectionsData = await collectionsResponse.json();
 
@@ -71,7 +71,7 @@ export default function UserProfile({ userId }) {
           }
 
           const likesResponse = await fetch(
-            `https://arcana-back-v2.vercel.app/likes/${userId}`
+            `https://arcana-back-2.vercel.app/likes/${userId}`
           );
           const likesData = await likesResponse.json();
 
@@ -79,7 +79,7 @@ export default function UserProfile({ userId }) {
             setUserLikes(likesData.likes);
 
             const topResponse = await fetch(
-              `https://arcana-back-v2.vercel.app/collections/top/${userId}`
+              `https://arcana-back-2.vercel.app/collections/top/${userId}`
             );
             const topData = await topResponse.json();
             if (topData.result) {
@@ -94,7 +94,7 @@ export default function UserProfile({ userId }) {
             }
 
             const typeContent = await fetch(
-              `https://arcana-back-v2.vercel.app/elements/user/${userId}`
+              `https://arcana-back-2.vercel.app/elements/user/${userId}`
             );
             const typeData = await typeContent.json();
             if (typeData.result) {
@@ -382,14 +382,11 @@ export default function UserProfile({ userId }) {
     const targetUserId = userId;
 
     try {
-      const res = await fetch(
-        "https://arcana-back-v2.vercel.app/users/follow",
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ userId: currentUserId, targetUserId }),
-        }
-      );
+      const res = await fetch("https://arcana-back-2.vercel.app/users/follow", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: currentUserId, targetUserId }),
+      });
 
       const data = await res.json();
 
@@ -429,7 +426,7 @@ export default function UserProfile({ userId }) {
   const handleSendMessage = async (messageContent) => {
     try {
       const conversationRes = await fetch(
-        "https://arcana-back-v2.vercel.app/messages/start-conversation",
+        "https://arcana-back-2.vercel.app/messages/start-conversation",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -452,7 +449,7 @@ export default function UserProfile({ userId }) {
 
       if (messageContent) {
         const messageRes = await fetch(
-          "https://arcana-back-v2.vercel.app/messages",
+          "https://arcana-back-2.vercel.app/messages",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },

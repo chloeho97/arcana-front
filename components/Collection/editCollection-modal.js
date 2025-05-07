@@ -98,7 +98,7 @@ export function EditCollectionModal({ isOpen, onClose, selectedCollection }) {
   const handleDelete = async () => {
     try {
       const deleteElement = await fetch(
-        `https://arcana-back-v2.vercel.app/collections/${selectedCollection._id}`,
+        `https://arcana-back-2.vercel.app/collections/${selectedCollection._id}`,
         { method: "DELETE" }
       );
       onClose();

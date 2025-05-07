@@ -20,13 +20,13 @@ const ChatBox = ({ currentUserId, targetUserId, targetUser, onCloseChat }) => {
   const fetchMessages = async () => {
     try {
       const res = await fetch(
-        `https://arcana-back-v2.vercel.app/messages/${currentUserId}/${targetUserId}`
+        `https://arcana-back-2.vercel.app/messages/${currentUserId}/${targetUserId}`
       );
       const data = await res.json();
       setMessages(data);
 
       await fetch(
-        `https://arcana-back-v2.vercel.app/messages/${currentUserId}/${targetUserId}/mark-read`,
+        `https://arcana-back-2.vercel.app/messages/${currentUserId}/${targetUserId}/mark-read`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -44,7 +44,7 @@ const ChatBox = ({ currentUserId, targetUserId, targetUser, onCloseChat }) => {
     setIsSending(true);
 
     try {
-      await fetch("https://arcana-back-v2.vercel.app/messages", {
+      await fetch("https://arcana-back-2.vercel.app/messages", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -75,7 +75,7 @@ const ChatBox = ({ currentUserId, targetUserId, targetUser, onCloseChat }) => {
 
     try {
       await fetch(
-        `https://arcana-back-v2.vercel.app/messages/${selectedMessage._id}`,
+        `https://arcana-back-2.vercel.app/messages/${selectedMessage._id}`,
         {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },

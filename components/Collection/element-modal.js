@@ -37,7 +37,7 @@ const ElementModal = ({ collectionId, onClose }) => {
         setIsLoading(true);
         axios
           .get(
-            `https://arcana-back-v2.vercel.app/autocomplete/${formData.type}?query=${formData.title}`
+            `https://arcana-back-2.vercel.app/autocomplete/${formData.type}?query=${formData.title}`
           )
           .then((response) => {
             setSearchResults(response.data);
@@ -133,7 +133,7 @@ const ElementModal = ({ collectionId, onClose }) => {
 
     try {
       const response = await fetch(
-        `https://arcana-back-v2.vercel.app/elements`,
+        `https://arcana-back-2.vercel.app/elements`,
         {
           method: "POST",
           headers: {
