@@ -65,33 +65,21 @@ export function EditCollectionModal({ isOpen, onClose, selectedCollection }) {
     setIsSubmitting(true);
 
     try {
-      let coverUrl = formData.cover;
+      const formDataToSend = new FormData();
+      formDataToSend.append("title", formData.title);
+      formDataToSend.append("description", formData.description);
+      formDataToSend.append("visibility", formData.visibility);
+      formDataToSend.append("tags", formData.tags);
 
-      // Si un nouveau fichier est uploadé, on écrase
+      // Vérifier si une nouvelle image est envoyée
       if (imageFile) {
-        const fd = new FormData();
-        fd.append("file", imageFile);
-        fd.append("upload_preset", "arcana_unsigned");
-        fd.append("cloud_name", "dkj6slmwt");
-        fd.append("folder", "collectionCover");
-
-        const cloudinaryRes = await fetch(
-          "https://api.cloudinary.com/v1_1/dkj6slmwt/image/upload",
-          { method: "POST", body: fd }
-        );
-        const { secure_url } = await cloudinaryRes.json();
-        coverUrl = secure_url;
+        formDataToSend.append("cover", imageFile);
       }
 
       const response = await axios.put(
-        `https://arcana-back-v2.vercel.app/collections/${selectedCollection._id}`,
-        {
-          title: formData.title,
-          description: formData.description,
-          visibility: formData.visibility,
-          cover: coverUrl,
-          tags: formData.tags,
-        }
+        `http://localhost:3000/collections/${selectedCollection._id}`,
+        formDataToSend,
+        { headers: { "Content-Type": "multipart/form-data" } }
       );
 
       if (response.data.result) {

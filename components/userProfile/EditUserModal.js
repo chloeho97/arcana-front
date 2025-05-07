@@ -78,45 +78,23 @@ const EditUserModal = ({ isOpen, onClose, userInfo, onUpdate }) => {
     setIsSubmitting(true);
 
     try {
-      let avatarUrl = userInfo?.avatar || ""; // Si aucun fichier n'est sélectionné, garder l'ancienne URL
+      const formDataToSend = new FormData();
+      formDataToSend.append("username", formData.username);
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("firstName", formData.firstName);
+      formDataToSend.append("lastName", formData.lastName);
+      formDataToSend.append("bio", formData.bio);
 
-      // Étape 1 : Upload vers Cloudinary si un nouveau fichier est sélectionné
+      // Si un avatar est sélectionné, l'ajouter à la FormData
       if (avatarFile) {
-        const formDataImage = new FormData();
-        formDataImage.append("file", avatarFile);
-        formDataImage.append("upload_preset", "arcana_unsigned");
-        formDataImage.append("cloud_name", "dkj6slmwt");
-        formDataImage.append("folder", "avatars");
-
-        const cloudinaryRes = await fetch(
-          "https://api.cloudinary.com/v1_1/dkj6slmwt/image/upload",
-          {
-            method: "POST",
-            body: formDataImage,
-          }
-        );
-
-        const cloudinaryData = await cloudinaryRes.json();
-
-        if (cloudinaryData.secure_url) {
-          avatarUrl = cloudinaryData.secure_url; // Met à jour avatarUrl si le fichier est téléchargé avec succès
-        } else {
-          console.error("Erreur Cloudinary : Pas d'URL sécurisée retournée");
-          return;
-        }
+        formDataToSend.append("avatar", avatarFile);
       }
 
-      // Étape 2 : Envoyer l'objet JSON au backend pour mettre à jour les informations de l'utilisateur
+      // Étape 2 : Envoyer l'objet FormData au backend pour mettre à jour les informations de l'utilisateur
       const response = await axios.put(
-        `https://arcana-back-v2.vercel.app/users/${userId}`,
-        {
-          username: formData.username,
-          email: formData.email,
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          bio: formData.bio,
-          avatar: avatarUrl, // Envoie l'URL de l'avatar (nouvelle ou ancienne)
-        }
+        `http://localhost:3000/users/${userId}`,
+        formDataToSend,
+        { headers: { "Content-Type": "multipart/form-data" } }
       );
 
       if (response.data.result) {

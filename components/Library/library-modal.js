@@ -71,36 +71,23 @@ export function LibraryModal({ isOpen, onClose, onCollectionCreated }) {
     setIsSubmitting(true);
 
     try {
-      let coverUrl = "";
+      const formDataToSend = new FormData();
+      formDataToSend.append("title", formData.title);
+      formDataToSend.append("description", formData.description);
+      formDataToSend.append("userId", userId);
+      formDataToSend.append("visibility", formData.visibility);
+      formDataToSend.append("tags", formData.tags);
 
+      // Si une image est sélectionnée, l'ajouter à FormData
       if (imageFile) {
-        const formDataImage = new FormData();
-        formDataImage.append("file", imageFile);
-        formDataImage.append("upload_preset", "arcana_unsigned");
-        formDataImage.append("cloud_name", "dkj6slmwt");
-        formDataImage.append("folder", "collectionCover");
-
-        const cloudinaryRes = await fetch(
-          "https://api.cloudinary.com/v1_1/dkj6slmwt/image/upload",
-          {
-            method: "POST",
-            body: formDataImage,
-          }
-        );
-
-        const cloudinaryData = await cloudinaryRes.json();
-        coverUrl = cloudinaryData.secure_url;
+        formDataToSend.append("cover", imageFile); // Envoi au backend
       }
 
       const response = await axios.post(
-        "https://arcana-back-v2.vercel.app/collections",
+        "http://localhost:3000/collections",
+        formDataToSend,
         {
-          title: formData.title,
-          description: formData.description,
-          userId,
-          cover: coverUrl && coverUrl.trim() !== "" ? coverUrl : undefined,
-          visibility: formData.visibility,
-          tags: formData.tags,
+          headers: { "Content-Type": "multipart/form-data" },
         }
       );
 
@@ -108,10 +95,13 @@ export function LibraryModal({ isOpen, onClose, onCollectionCreated }) {
         onCollectionCreated(response.data.collection);
         onClose();
       } else {
-        console.error("Error creating collection:", response.data.error);
+        console.error(
+          "Erreur lors de la création de la collection :",
+          response.data.error
+        );
       }
     } catch (error) {
-      console.error("Error creating collection:", error);
+      console.error("Erreur lors de l'envoi des données :", error);
     } finally {
       setIsSubmitting(false);
     }
